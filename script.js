@@ -1,8 +1,46 @@
-//Función para extraer el valor numerico ingresado en cada tienda
+function crearTiendas(contenedorID, min, cantidadTiendas) {
+  //encontrar contenedor por su id
+  let elementoContenedor = document.getElementById(contenedorID);
+
+  // loop para crear tantas tiendas como se pidan
+  for (
+    let conteoTiendas = 1;
+    conteoTiendas <= cantidadTiendas;
+    conteoTiendas++
+  ) {
+    let textoEtiqueta = "Tienda " + conteoTiendas;
+
+    let ParrafoTienda = crearParrafoTienda(textoEtiqueta, min);
+
+    elementoContenedor.appendChild(ParrafoTienda);
+  }
+}
+
+function crearParrafoTienda(textoLabel, valorMin) {
+  let elementoParrafo = document.createElement("p");
+
+  let elementoEtiqueta = document.createElement("label");
+  elementoEtiqueta.innerText = textoLabel + ": ";
+
+  elementoEtiqueta.setAttribute("for", textoLabel);
+
+  let elementoInput = document.createElement("input");
+
+  elementoInput.className = "form-control";
+  elementoInput.setAttribute("type", "number");
+  elementoInput.setAttribute("id", textoLabel);
+  elementoInput.setAttribute("min", valorMin);
+  elementoInput.setAttribute("value", 0);
+
+  //Agregar label al input de parrafo
+  elementoParrafo.appendChild(elementoEtiqueta);
+  elementoParrafo.appendChild(elementoInput);
+
+  return elementoParrafo;
+}
 
 function extraerNumeroDesdeElemento(elemento) {
-  let miElemento = document.getElementById(elemento); //Variable que extrae el valor del parametro (elemento).
-  let miTexto = miElemento.value; //Extraer el valor del parametro "elemento" y almacenarlo en la variable.
+  let miTexto = elemento.value; //Extraer el valor del parametro "elemento" y almacenarlo en la variable.
   let miNumero = Number(miTexto); //Convierte el valor de lo almacenado en "miTexto" y convertirlo a número.
 
   return miNumero;
@@ -10,13 +48,14 @@ function extraerNumeroDesdeElemento(elemento) {
 
 function calcular() {
   let ventas = [];
+  let posicionVentas = 0;
+  let elementosVentas = document.getElementById("itemsTiendas");
 
-  ventas[0] = extraerNumeroDesdeElemento("ventasTienda1");
-  ventas[1] = extraerNumeroDesdeElemento("ventasTienda2");
-  ventas[2] = extraerNumeroDesdeElemento("ventasTienda3");
-  ventas[3] = extraerNumeroDesdeElemento("ventasTienda4");
-  ventas[4] = extraerNumeroDesdeElemento("ventasTienda5");
-  ventas[5] = extraerNumeroDesdeElemento("ventasTienda6");
+  for (let item of elementosVentas.children) {
+    let valorVenta = extraerNumeroDesdeElemento(item.children[1]);
+    ventas[posicionVentas] = valorVenta;
+    posicionVentas = posicionVentas + 1;
+  }
 
   //Empecemos con los cálculos
 
@@ -25,18 +64,18 @@ function calcular() {
   let ventaMenor = calcularMenor(ventas);
 
   let mensajeSalida =
-    "Total Ventas: " +
+    "Total Ventas: " + 
     totalVentas +
-    " / Venta Mayor: " +
+    "  |  Venta Mayor: " +
     ventaMayor +
-    " / Venta Menor: " +
+    "  |  Venta Menor: " +
     ventaMenor;
   let elementoSalida = document.getElementById("parrafoSalida");
 
   elementoSalida.textContent = mensajeSalida;
 }
 
-function sumarTotal() {
+function sumarTotal(array) {
   let total = 0;
   for (let venta of array) {
     total = total + venta;

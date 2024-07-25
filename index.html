@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
+<body onload="crearTiendas('itemsTiendas', 0, 7)">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -19,37 +19,7 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <div class="form-row">
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="ventasTienda1">Tienda 1</label>
-                                <input type="number" class="form-control" id="ventasTienda1" min="0">
-                            </div>
-
-                            <div class="forms-group col-md-6">
-                                <label for="ventasTienda2">Tienda 2</label>
-                                <input type="number" class="form-control" id="ventasTienda2" min="0">
-                            </div>
-
-                            <div class="forms-group col-md-6">
-                                <label for="ventasTienda3">Tienda 3</label>
-                                <input type="number" class="form-control" id="ventasTienda3" min="0">
-                            </div>
-
-                            <div class="forms-group col-md-6">
-                                <label for="ventasTienda4">Tienda 4</label>
-                                <input type="number" class="form-control" id="ventasTienda4" min="0">
-                            </div>
-
-                            <div class="forms-group col-md-6">
-                                <label for="ventasTienda5">Tienda 5</label>
-                                <input type="number" class="form-control" id="ventasTienda5" min="0">
-                            </div>
-
-                            <div class="forms-group col-md-6">
-                                <label for="ventasTienda6">Tienda 6</label>
-                                <input type="number" class="form-control" id="ventasTienda6" min="0">
+                            <div class="form-group col-md-6" id="itemsTiendas">
                             </div>
 
                             <div id="parrafoSalida" class="container mt-3 p-3 bg-light border rounded">Resultados
